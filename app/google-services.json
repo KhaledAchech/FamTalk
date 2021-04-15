@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "220205459256",
+    "project_id": "famtalk-89dbd",
+    "storage_bucket": "famtalk-89dbd.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:220205459256:android:c4ca86efb37487f21683cd",
+        "android_client_info": {
+          "package_name": "tn.KhaledAchech.famtalk"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "220205459256-gqd2mc5mtdhsci9a19fmgffbps4nmn06.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBlPSUy8Ywkw0SirVnSFKFhWYLOkhBSa_c"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "220205459256-gqd2mc5mtdhsci9a19fmgffbps4nmn06.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
