@@ -29,12 +29,31 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/username"
                 android:layout_marginLeft="25dp"
-                android:textColor="#fff"
+                android:textColor="@color/white"
                 android:textStyle="bold"
                 android:layout_marginStart="25dp" />
 
         </androidx.appcompat.widget.Toolbar>
 
+        <com.google.android.material.tabs.TabLayout
+            android:id="@+id/tab_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/teal_700"
+            app:tabSelectedTextColor="@color/white"
+            app:tabIndicatorColor="@color/white"
+            app:tabTextColor="@color/white"
+            />
+
     </com.google.android.material.appbar.AppBarLayout>
+
+    <androidx.viewpager.widget.ViewPager
+        android:id="@+id/view_pager"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_behavior = "@string/appbar_scrolling_view_behavior"
+
+        />
+
 
 </LinearLayout>
