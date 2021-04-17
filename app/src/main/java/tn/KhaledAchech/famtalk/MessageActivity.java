@@ -3,7 +3,11 @@ package tn.KhaledAchech.famtalk;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 import de.hdodenhof.circleimageview.CircleImageView;
+import tn.KhaledAchech.famtalk.Adapter.MessageAdapter;
+import tn.KhaledAchech.famtalk.Model.Chat;
 import tn.KhaledAchech.famtalk.Model.User;
 
 import android.content.Intent;
@@ -23,7 +27,9 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 public class MessageActivity extends AppCompatActivity {
 
@@ -35,6 +41,11 @@ public class MessageActivity extends AppCompatActivity {
 
     ImageButton btn_send;
     EditText text_send;
+
+    MessageAdapter messageAdapter;
+    List<Chat> mchat;
+
+    RecyclerView recyclerView;
 
     Intent intent;
 
@@ -54,13 +65,19 @@ public class MessageActivity extends AppCompatActivity {
             }
         });
 
+        recyclerView = findViewById(R.id.recycler_view);
+        recyclerView.setHasFixedSize(true);
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager( getApplicationContext());
+        linearLayoutManager.setStackFromEnd(true);
+        recyclerView.setLayoutManager(linearLayoutManager);
+
         profile_image = findViewById(R.id.profile_image);
         username = findViewById(R.id.username);
         btn_send = findViewById(R.id.btn_send);
         text_send = findViewById(R.id.text_send);
 
         intent = getIntent();
-        final String userid = intent.getStringExtra("userid");
+        final String user_id = intent.getStringExtra("userid");
         fuser = FirebaseAuth.getInstance().getCurrentUser();
 
         btn_send.setOnClickListener(new View.OnClickListener() {
@@ -69,7 +86,7 @@ public class MessageActivity extends AppCompatActivity {
                 String msg = text_send.getText().toString();
                 if (!msg.equals(""))
                 {
-                    sendMessage(fuser.getUid(),userid, msg);
+                    sendMessage(fuser.getUid(),user_id, msg);
                 }
                 else{
                     Toast.makeText(MessageActivity.this, "You can't send an empty message", Toast.LENGTH_SHORT).show();
@@ -79,12 +96,13 @@ public class MessageActivity extends AppCompatActivity {
         });
 
 
-        db_reference = FirebaseDatabase.getInstance().getReference("Users").child(userid);
+        db_reference = FirebaseDatabase.getInstance().getReference("Users").child(user_id);
 
         db_reference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 User user = snapshot.getValue(User.class);
+                assert user != null;
                 username.setText(user.getUsername());
                 if (user.getImageURL().equals("default"))
                 {
@@ -92,6 +110,8 @@ public class MessageActivity extends AppCompatActivity {
                 } else {
                     Glide.with(MessageActivity.this).load(user.getImageURL()).into(profile_image);
                 }
+
+                readMessages(fuser.getUid(), user_id, user.getImageURL());
             }
 
             @Override
@@ -112,5 +132,36 @@ public class MessageActivity extends AppCompatActivity {
         hashMap.put("message", message);
 
         db_reference.child("Chats").push().setValue(hashMap);
+    }
+
+    private void readMessages(String myid, String userid, String imageurl)
+    {
+        mchat = new ArrayList<>();
+
+        db_reference = FirebaseDatabase.getInstance().getReference("Chats");
+        db_reference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                mchat.clear();
+                for (DataSnapshot dataSnapshot: snapshot.getChildren())
+                {
+                    Chat chat = dataSnapshot.getValue(Chat.class);
+                    if (chat.getReceiver().equals(myid) && chat.getSender().equals(userid) ||
+                            chat.getReceiver().equals(userid) && chat.getSender().equals(myid))
+                    {
+                        mchat.add(chat);
+                    }
+
+                    messageAdapter = new MessageAdapter(MessageActivity.this, mchat, imageurl);
+                    recyclerView.setAdapter(messageAdapter);
+                }
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
     }
 }
