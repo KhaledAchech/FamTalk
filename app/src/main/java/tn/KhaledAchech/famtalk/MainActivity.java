@@ -10,6 +10,7 @@ import androidx.fragment.app.FragmentPagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 import de.hdodenhof.circleimageview.CircleImageView;
 import tn.KhaledAchech.famtalk.Fragments.ChatsFragment;
+import tn.KhaledAchech.famtalk.Fragments.ProfileFragment;
 import tn.KhaledAchech.famtalk.Fragments.UsersFragment;
 import tn.KhaledAchech.famtalk.Model.User;
 
@@ -81,6 +82,7 @@ public class MainActivity extends AppCompatActivity {
 
         viewPagerAdapter.addFragment(new ChatsFragment(), "Chats");
         viewPagerAdapter.addFragment(new UsersFragment(),"Users");
+        viewPagerAdapter.addFragment(new ProfileFragment(),"Profile");
 
         viewPager.setAdapter(viewPagerAdapter);
 
