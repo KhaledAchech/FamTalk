@@ -27,6 +27,7 @@
             android:layout_height="wrap_content"
             android:id="@+id/username"
             android:layout_marginTop="10dp"
+
             app:met_floatingLabel="normal"
             android:hint="Username"/>
 
@@ -52,7 +53,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Register"
-            android:backgroundTint="@color/teal_700"
+            android:backgroundTint="@color/BlueSky"
             android:layout_marginTop="10dp"
             android:id="@+id/btn_register"/>
 

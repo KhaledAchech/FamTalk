@@ -7,4 +7,19 @@
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+
+    <color name="baseColor">#2b2e4a</color>
+    <color name="logoColor">#e84545</color>
+    <color name="DarkOrange">#903749</color>
+    <color name="LightPurple">#53354a</color>
+    <color name="Beige">#ffefcf</color>
+
+    <color name="DarkBlue">#084A76</color>
+    <color name="CoolBlack">#062F5B</color>
+    <color name="LightBlue">#41A5B2</color>
+    <color name="BlueSky">#5CB8BD</color>
+    <color name="LightBlueSky">#82CDCF</color>
+    <color name="DiamondBlue">#A9E0DE</color>
+
+
 </resources>
