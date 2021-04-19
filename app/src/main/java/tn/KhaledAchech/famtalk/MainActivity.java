@@ -81,6 +81,8 @@ public class MainActivity extends AppCompatActivity {
 
         ViewPagerAdapter viewPagerAdapter = new ViewPagerAdapter(getSupportFragmentManager());
 
+        //db_reference = FirebaseDatabase.getInstance().getReference("Chats");
+
         viewPagerAdapter.addFragment(new ChatsFragment(), "Chats");
         viewPagerAdapter.addFragment(new UsersFragment(),"Users");
         viewPagerAdapter.addFragment(new ProfileFragment(),"Profile");
