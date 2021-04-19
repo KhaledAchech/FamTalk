@@ -2,10 +2,6 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="tn.KhaledAchech.famtalk">
 
-    <uses-permission android:name="android.permission.INTERNET"/>
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
-
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -13,7 +9,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.FamTalk">
-        <activity android:name=".MessageActivity"></activity>
+        <activity android:name=".ResetPasswordActivity"
+            android:parentActivityName=".LoginActivity"></activity>
+        <activity android:name=".MessageActivity" />
         <activity
             android:name=".LoginActivity"
             android:parentActivityName=".StartActivity" />
@@ -29,5 +27,9 @@
             </intent-filter>
         </activity>
     </application>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+
+    <uses-permission android:name="android.permission.INTERNET" />
 
 </manifest>
